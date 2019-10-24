@@ -23,7 +23,7 @@ def say_datetime():
     jtalk(text)
 
 def input_talk():
-    text=input('文言を入力してください => ')
+    text=input('文言を入力してください ==> ')
     jtalk(text)
 
 if __name__ == '__main__':
