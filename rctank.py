@@ -106,7 +106,7 @@ def range_find():
   #print("Distance = " + str('{:.1f}'.format(median)) + 'cm')
   dist_fm = '{:.1f}'.format(median)
   IPslack=slackweb.Slack(url="https://hooks.slack.com/services/~~~webhook~~)
-  IPslack.notify(text="Distance = " + dist_fm + "cm\nTemprature = "+ temp_fm + 'C', username="Newtank Range Finder")
+  IPslack.notify(text="Distance = " + dist_fm + "cm\nTemprature = "+ temp_fm + '°C', username="Newtank Range Finder")
   return
 
 @webiopi.macro

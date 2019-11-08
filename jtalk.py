@@ -1,6 +1,7 @@
 #coding: utf-8
 import subprocess
 from datetime import datetime
+from time import sleep
 
 def jtalk(t):
     open_jtalk=['open_jtalk']
@@ -23,9 +24,14 @@ def say_datetime():
     jtalk(text)
 
 def input_talk():
-    text=input('文言を入力してください ==> ')
+    text=input('文言を入力してください => ')
     jtalk(text)
 
 if __name__ == '__main__':
     #say_datetime()
+    cmd = "gpio -g mode 18 ALT5"
+    subprocess.call(cmd.split())
     input_talk()
+    sleep(3)
+    cmd = "gpio -g mode 18 ALT0"
+    subprocess.call(cmd.split())
