@@ -26,6 +26,7 @@ void setup()
 {
   // Serial Setting0
   Serial.begin(9600);
+  delay(5000);
   servo_H.attach(servo_hpwm); 
   servo_V.attach(servo_vpwm); 
 
@@ -83,19 +84,21 @@ void loop(){
     }
 
     if(str.substring(0,1) == "H"){
-      //servo_H.attach(servo_hpwm); 
+      servo_H.attach(servo_hpwm); 
       String arg1 = str.substring(1,4);
       int H_tilt = arg1.toInt();
       servo_H.write(H_tilt);
-      //servo_H.detach();
+      delay(300);
+      servo_H.detach();
     }
 
     if(str.substring(0,1) == "V"){
-      //servo_V.attach(servo_vpwm); 
+      servo_V.attach(servo_vpwm); 
       String arg1 = str.substring(1,4);
       int V_tilt = arg1.toInt();
       servo_V.write(V_tilt);
-      //servo_V.detach(); 
+      delay(300);
+      servo_V.detach(); 
     }
       
     if(str.substring(0,1) == "X"){
