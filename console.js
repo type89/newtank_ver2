@@ -129,7 +129,7 @@ $(window).keydown(function(e){
 $("#button_STOP").on('click', function () {
 	L_level = document.getElementById("L-Morter").textContent = 0;
 	R_level = document.getElementById("R-Morter").textContent = 0;
-	direction ="S"
+	direction ="K"
 	Motor(direction, L_duty_array[L_level], R_duty_array[R_level]);
 	i=0
 	return;
