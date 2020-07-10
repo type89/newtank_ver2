@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../arduino_original/ESP32_new_gatekeeper"
+		},
+		{
+			"path": "../go"
+		},
+		{
+			"path": "../../arduino_original/Encorder_radio"
+		}
+	],
+	"settings": {
+		"arduino.commandPath": "arduino"
+	}
+}
