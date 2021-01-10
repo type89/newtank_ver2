@@ -83,12 +83,6 @@ void loop(){
       tank_stop();
     }
 
-    if(str.substring(0,1) == "K"){
-      tank_brake();
-      delay(100);
-      tank_stop();
-    }
-    
     if(str.substring(0,1) == "H"){
       servo_H.attach(servo_hpwm); 
       String arg1 = str.substring(1,4);
@@ -133,13 +127,6 @@ void tank_right(int L_duty, int R_duty){
 void tank_left(int L_duty, int R_duty){
     analogWrite(Motor_AB,L_duty);
     analogWrite(Motor_BF,R_duty); 
-}
-
-void tank_brake(){
-    analogWrite(Motor_AF,50);
-    analogWrite(Motor_BF,50);
-    analogWrite(Motor_AB,50);
-    analogWrite(Motor_BB,50);
 }
 
 void tank_stop(){

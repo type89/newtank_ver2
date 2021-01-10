@@ -20,7 +20,7 @@
     <table>
         <tbody>
           <tr>
-              <td class="table-img" colspan="5"><div class="example"><img src="http://192.168.0.25:8080/?action=stream" max-width="100%" /></div></td>
+              <td class="table-img" colspan="5"><div class="example"><img src="http://192.168.68.118:8080/?action=stream" max-width="100%" /></div></td>
           </tr>
           <tr class="table-txt">
           <td colspan="5">Camera</td>
@@ -31,7 +31,7 @@
             <td colspan="2"></td>
             </tr>
             <tr>
-              <td colspan="2" align="right">Swivel : </td>
+              <td colspan="2" align="right">Pan : </td>
                 <td id="H-Tilt" class="camera_tilt"><p></td>
                   <td colspan="2"></td>
               </tr>
@@ -63,11 +63,11 @@
             </tr>
             <tr>
                 <td></td>
-                <td></td>
+                <td><input id="room_lon" type="button" class="square_btn" value="RL ON"></td>
                 <td>
                   <form><input id="button_CDOWN" type="button" class="square_btn" value="▼">
                 </form></td>
-                <td></td>
+                <td><input id="room_loff" type="button" class="square_btn" value="RL OFF"></td>
                 <td></td>
             </tr>
             <tr>
@@ -90,7 +90,9 @@
                 <td>
                   <form><input id="button_F" type="button" class="square_btn" value="▲">
                 </form></td>
-                <td></td>
+                <td>
+                  <form><input id="button_CAM" type="button" class="square_btn" value="CAM">
+                  </form></td>
                 <td></td>
             </tr>
             <tr>

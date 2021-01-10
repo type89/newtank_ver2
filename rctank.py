@@ -7,6 +7,9 @@ import slackweb
 import os
 import glob
 from time import sleep
+import requests
+import subprocess
+import datetime
 
 webiopi.setDebug()
 
@@ -105,8 +108,42 @@ def range_find():
   median = statistics.median(dislist)
   #print("Distance = " + str('{:.1f}'.format(median)) + 'cm')
   dist_fm = '{:.1f}'.format(median)
-  IPslack=slackweb.Slack(url="https://hooks.slack.com/services/~~~webhook~~)
+  IPslack=slackweb.Slack(url="WebhookのURL")
   IPslack.notify(text="Distance = " + dist_fm + "cm\nTemprature = "+ temp_fm + '°C', username="Newtank Range Finder")
+  return
+
+def Get_photo():
+  filepath = '/home/pi/work/webiopi/jpg/'
+  args = 'rm -f ' + filepath + '*.jpg'
+  subprocess.Popen(args, shell=True)
+  IPslack=slackweb.Slack(url="WebhookのURL")
+  IPslack.notify(text="Now shooting...", username="Newtank Camera")   
+  now = datetime.datetime.now()
+  now = "{0:%Y-%m-%d-%H:%M:%S}".format(now)
+  filename = now + '.jpg'
+  streamurl = ' http://localhost:8080/?action=snapshot'
+  args = 'wget -O ' + filepath + filename + streamurl
+  subprocess.Popen(args, shell=True)
+  sleep(2)
+  TOKEN = 'token'
+  CHANNEL = 'channel'
+  files = {'file': open(filepath + filename, 'rb')}
+  param = {'token':TOKEN,
+           'channels':CHANNEL,
+           'filename':"filename",
+           'initial_comment': now + " file uploaded from Recon Tank",
+           'title': now}
+  requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
+  return
+
+def room_lighton():
+  args = 'python3 /home/pi/work/webiopi/irrp.py -p -g17 -f /home/pi/work/webiopi/codes light:on'
+  subprocess.Popen(args, shell=True)
+  return
+
+def room_lightoff():
+  args = 'python3 /home/pi/work/webiopi/irrp.py -p -g17 -f /home/pi/work/webiopi/codes light:off'
+  subprocess.Popen(args, shell=True)
   return
 
 @webiopi.macro
@@ -119,3 +156,18 @@ def serial_send(arg):
 def range_finder():
     range_find()
     return
+
+@webiopi.macro
+def shoot():
+    Get_photo()
+    return
+
+@webiopi.macro
+def room_lon():
+    room_lighton()
+    return
+
+@webiopi.macro
+def room_loff():
+    room_lightoff()
+    return  

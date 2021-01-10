@@ -48,6 +48,25 @@ function range_finder()
 	webiopi().callMacro("range_finder");
 }
 
+function shoot()
+{ 
+  console.log("shoot");
+  webiopi().callMacro("shoot");
+}
+
+function room_lon()
+{ 
+  console.log("room_lon");
+  webiopi().callMacro("room_lon");
+}
+
+function room_loff()
+{ 
+  console.log("room_loff");
+  webiopi().callMacro("room_loff");
+}
+
+
 window.onload = function(){
 	document.getElementById("L-Morter").textContent = 0;
 	document.getElementById("R-Morter").textContent = 0;
@@ -388,6 +407,46 @@ $(window).keydown(function(e){
  	{
 		$("#button_RF").trigger("click");
 	}
+});
+
+
+$("#button_CAM").on('click', function () {
+  shoot();
+  return;
+});
+
+$(window).keydown(function(e){
+  var key = e.which;
+  if(key == 87)  // Key[w]
+  {
+    $("#button_CAM").trigger("click");
+  }
+});
+
+$("#room_lon").on('click', function () {
+  room_lon();
+  return;
+});
+
+$(window).keydown(function(e){
+  var key = e.which;
+  if(key == 79)  // Key[o]
+  {
+    $("#room_lon").trigger("click");
+  }
+});
+
+$("#room_loff").on('click', function () {
+  room_loff();
+  return;
+});
+
+$(window).keydown(function(e){
+  var key = e.which;
+  if(key == 80)  // Key[p]
+  {
+    $("#room_loff").trigger("click");
+  }
 });
 
 })
