@@ -1,40 +1,29 @@
 //MX1508_ControllerSimplev0.ino
 //by Hamish Trolove - www.techmonkeybusiness.com
 
-/*
-Pin connections (Arduino Nano):
-D9  To Motor Controller Port IN2
-D10 To Motor Controller Port IN1
-*/
-
 #include <Servo.h>
-
+Servo servo_H;
+Servo servo_V;
+const int servo_hpwm = 9;
+const int servo_vpwm = 10;
+const int LED_PIN = 14;
 const int Motor_AF = 5; //Forward Motor A Pin
 const int Motor_AB = 3;  //Backward Motor A Pin
 const int Motor_BF = 6; //Forward Motor B Pin
 const int Motor_BB = 11;  //Backward Motor B Pin
 
-Servo servo_H;
-Servo servo_V;
-
-const int servo_hpwm = 9;
-const int servo_vpwm = 10;
-
-const int LED_PIN = 14;
 
 void setup()
 {
   // Serial Setting0
   Serial.begin(9600);
-  delay(5000);
-  servo_H.attach(servo_hpwm); 
-  servo_V.attach(servo_vpwm); 
-
+  while (!Serial)
+  {
+  }
   pinMode(Motor_AF, OUTPUT);
   pinMode(Motor_AB, OUTPUT);
   pinMode(Motor_BF, OUTPUT);
   pinMode(Motor_BB, OUTPUT);
-  
   pinMode(LED_PIN,OUTPUT);
 }
 
@@ -83,6 +72,12 @@ void loop(){
       tank_stop();
     }
 
+    if(str.substring(0,1) == "K"){
+      tank_brake();
+      delay(100);
+      tank_stop();
+    }
+    
     if(str.substring(0,1) == "H"){
       servo_H.attach(servo_hpwm); 
       String arg1 = str.substring(1,4);
@@ -127,6 +122,13 @@ void tank_right(int L_duty, int R_duty){
 void tank_left(int L_duty, int R_duty){
     analogWrite(Motor_AB,L_duty);
     analogWrite(Motor_BF,R_duty); 
+}
+
+void tank_brake(){
+    analogWrite(Motor_AF,50);
+    analogWrite(Motor_BF,50);
+    analogWrite(Motor_AB,50);
+    analogWrite(Motor_BB,50);
 }
 
 void tank_stop(){
